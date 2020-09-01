@@ -17,7 +17,11 @@ const koaLayout = require('./middleware/koa-layout');
 
 // setup the koa app, similar to express
 const app = new Koa();
-const PORT = process.env.PORT || 8080;
+
+const fs = require("fs");
+const DEV = fs.existsSync(".dev")
+
+const PORT = !DEV ? process.env.PORT : 8080;
 
 // require models for syncing
 const db = require("./models");
